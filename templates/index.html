@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Guide</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}" >
+
+</head>
+
+<body >
+    <div class="parent">
+        <div class = "top">
+            <div class="insideTop"><h3>Crop Recommendation</h3> </div>
+        </div>
+        <div class = "newForm">
+            <form method = "POST"  onsubmit="return validate()" action="{{url_for('predict')}}" autocomplete="on">
+                <div class = "textfield">
+                    <input type="text" id="n" name="n" placeholder="Nitrogen" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="p" name="p" placeholder="Phosporous" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="k" name="k" placeholder="Potassium" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="temp" name="temp" placeholder="Temperature" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="h" name="h" placeholder="Humidity" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="ph" name="ph" placeholder="Ph Value" required>
+                </div>
+                <div class = "textfield">
+                    <input type="text" id="rain" name="rain" placeholder="Rainfall" required>
+                </div>
+
+                <button type="submit" class="btn">Predict Crop</button>
+            </form>
+        </div>
+
+        {% if prediction %}
+            <p class="Base2"> Your Input Xray Image Is Detected As
+                <b class="A">{{prediction}}</b>
+            </p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
