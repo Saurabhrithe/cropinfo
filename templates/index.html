@@ -3,51 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crop Guide</title>
+    <title>Crop Info</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}" >
 
 </head>
 
 <body >
-    <div class="parent">
-        <div class = "top">
-            <div class="insideTop"><h3>Crop Recommendation</h3> </div>
-        </div>
-        <div class = "newForm">
-            <form method = "POST"  onsubmit="return validate()" action="{{url_for('predict')}}" autocomplete="on">
-                <div class = "textfield">
-                    <input type="text" id="n" name="n" placeholder="Nitrogen" required>
+    <div class="navBar">
+            <p class="heading">Crop Info</p>
+    </div>
+    <div class="Base">
+        <div class="container">
+            <div class="parent">
+                <div class="title">
+                        Crop Recommendation
                 </div>
-                <div class = "textfield">
-                    <input type="text" id="p" name="p" placeholder="Phosporous" required>
-                </div>
-                <div class = "textfield">
-                    <input type="text" id="k" name="k" placeholder="Potassium" required>
-                </div>
-                <div class = "textfield">
-                    <input type="text" id="temp" name="temp" placeholder="Temperature" required>
-                </div>
-                <div class = "textfield">
-                    <input type="text" id="h" name="h" placeholder="Humidity" required>
-                </div>
-                <div class = "textfield">
-                    <input type="text" id="ph" name="ph" placeholder="Ph Value" required>
-                </div>
-                <div class = "textfield">
-                    <input type="text" id="rain" name="rain" placeholder="Rainfall" required>
-                </div>
+                <div class = "newForm">
+                    <form method = "POST"  onsubmit="return validate()" action="{{url_for('predict')}}" autocomplete="on">
+                        <div class = "textfield">
+                            <input type="text" id="n" name="n" placeholder="Nitrogen" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="p" name="p" placeholder="Phosphorous" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="k" name="k" placeholder="Potassium" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="temp" name="temp" placeholder="Temperature" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="h" name="h" placeholder="Humidity" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="ph" name="ph" placeholder="Ph Value" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="rain" name="rain" placeholder="Rainfall(in mm)" required>
+                        </div>
 
-                <button type="submit" class="btn">Predict Crop</button>
-            </form>
+                        <div class="btn">
+                            <button type="submit"  class="btn_label" >Predict Crop</button>
+                        </div>
+                    </form>
+                </div>
+                <p class="w_report"><a href="{{url_for('call_weather')}}">click here</a> to get the latest weather update</p>
+                {% if predictionT %}
+                        <p class="w_report"> Temperature: {{predictionT}}, Humidity: {{predictionH}}</p>
+                {% endif %}
+            </div>
         </div>
 
-        {% if prediction %}
-            <p class="Base2"> Your Input Xray Image Is Detected As
-                <b class="A">{{prediction}}</b>
-            </p>
+
+        {% if predictionW %}
+            <div class="container">
+                <div class="weather">
+                    <p class="title">Weather Updates</p>
+                    <form method = "POST"  onsubmit="return validate()" action="{{url_for('get_weather')}}" autocomplete="on">
+                        <div class = "textfield">
+                            <input type="text" id="State" name="State" placeholder="State Name" required>
+                        </div>
+                        <div class = "textfield">
+                            <input type="text" id="City" name="City" placeholder="City Name" required>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" class="btn_label" >Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
         {% endif %}
 
-    </div>
 
+       {% if predictionCr %}
+                <div class="container">
+                <div class="result">
+                        <div class="title">
+                            Analysis
+                        </div>
+                        <p class="Base2">
+                            Based on the values provided by you,
+                            you should grow <b class="A">{{predictionCr}}</b> in your farm.
+                        <p>
+
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
