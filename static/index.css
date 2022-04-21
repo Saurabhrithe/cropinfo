@@ -1,44 +1,126 @@
-
-
 body{
     display:flex;
+    flex-direction: column;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
+    width:device-width;
     background: linear-gradient(135deg,#00BFFF,#9b5);
 }
-.top{
-    text-align:center;
-    font-size: 25px;
-    font-weight: 500;
-}
-.parent{
-    max-width: 700px;
-    width: 100%;
-    background: #AFEEEE;
-    padding: 25px 30px;
-    border-radius: 10px;
-}
-.parent .textfield{
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-    
-} 
-.parent .btn{
-    height:45px;
-    margin:45px 0;
-    
-}
-.parent .btn {
-    height:100%;
-    width: 100%;
-    outline: none;
-    color: #fff;
-    border:none ;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg,#00BFFF,#9b5);
+.navBar{
+    background: black;
+    width: auto;
+    height: 40px;
+    marign-bottom:10px;
+    border-radius: 5px;
 
 }
+.heading{
+    color: white;
+    margin:10px 100px;
+    text-decoration: underline;
+    font-weight:700;
+    font-family: cursive;
+}
+.Base{
+    max-width: auto;
+    display:flex;
+
+    justify-content: space-between;
+    align-self: normal;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.parent{
+    width: 365px;
+    background: Gainsboro;
+    border-radius: 10px;
+}
+
+.textfield{
+
+    text-align: center;
+    font-size: 25px;
+    max-width:240px;
+    font-weight: 500;
+    margin: 5px auto;
+    padding: 5px;
+}
+input{
+    width: 220px;
+    height: 25px;
+    border-color:yellow;
+    border-radius: 5px;
+}
+.btn{
+    margin: 13px auto;
+    width: 170px;
+    padding-bottom:10px;
+
+    padding:3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    border-radius: 5px;
+
+}
+.btn_label {
+    background: #111;
+    width: 170px;
+    height: 30px;
+    padding: 5px;
+
+    color: white;
+    font-weight: 700;
+    border-radius:5px;
+}
+.result{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+    background: Gainsboro;
+    height: 425px;
+    max-width:345px;
+    padding: 5px;
+    border-radius: 10px;
+}
+.Base2{
+font-family: "cambria";
+text-align:center;
+}
+
+.container{
+    max-width: 500px;
+    background: linear-gradient(green, #ff00e0, yellow, green);
+    padding:3px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.title{
+    font-weight: 900;
+    text-align: center;
+    padding:10px;
+}
+
+.weather{
+    padding: 10px;
+    background:red;
+    margin:0 auto;
+    max-width:350px;
+    background: Gainsboro;
+    border-radius: 10px;
+}
+.w_report{
+    text-align: center;
+}
+@media only screen and (min-width: 300px) {
+        .parent, input, .title, .w_report{
+            max-width: 300px;
+        }
+ }
