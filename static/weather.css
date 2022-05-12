@@ -1,0 +1,33 @@
+body{
+    //display:flex;
+    //flex-direction: column;
+    //height: 100vh;
+    //width:device-width;
+    background: linear-gradient(135deg,#00BFFF,#9b5);
+}
+.navBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    height: 40px;
+    background-color: black;
+    color: #fff;
+    border-radius: 10px;
+}
+.logo{
+    margin-left: 20px;
+}
+.menu{
+    margin-right: 20px;
+}
+a {
+ text-decoration: none;
+ color: white;
+}
+li {
+ list-style: none;
+}
+form, .btn{
+    padding: 10px;
+}
