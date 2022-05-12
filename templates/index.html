@@ -8,9 +8,11 @@
 
 </head>
 
-<body >
+<body>
     <div class="navBar">
-            <p class="heading">Crop Info</p>
+            <ul>
+                  <li><p class="heading">Crop Info</p></li>
+            </ul>
     </div>
     <div class="Base">
         <div class="container">
@@ -47,34 +49,10 @@
                         </div>
                     </form>
                 </div>
-                <p class="w_report"><a href="{{url_for('call_weather')}}">click here</a> to get the latest weather update</p>
-                {% if predictionT %}
-                        <p class="w_report"> Temperature: {{predictionT}}, Humidity: {{predictionH}}</p>
-                {% endif %}
+                <p class="w_report"><a href="{{url_for('call_W')}}">click here</a> to get the latest weather update</p>
+
             </div>
         </div>
-
-
-        {% if predictionW %}
-            <div class="container">
-                <div class="weather">
-                    <p class="title">Weather Updates</p>
-                    <form method = "POST"  onsubmit="return validate()" action="{{url_for('get_weather')}}" autocomplete="on">
-                        <div class = "textfield">
-                            <input type="text" id="State" name="State" placeholder="State Name" required>
-                        </div>
-                        <div class = "textfield">
-                            <input type="text" id="City" name="City" placeholder="City Name" required>
-                        </div>
-                        <div class="btn">
-                            <button type="submit" class="btn_label" >Submit</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        {% endif %}
-
 
        {% if predictionCr %}
                 <div class="container">
@@ -86,7 +64,6 @@
                             Based on the values provided by you,
                             you should grow <b class="A">{{predictionCr}}</b> in your farm.
                         <p>
-
                 </div>
             </div>
         {% endif %}
