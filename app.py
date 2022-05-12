@@ -1,17 +1,51 @@
-# import pickle
+
 from flask import Flask, render_template, request
-import requests, json
-from joblib import load
+import requests
 import pickle
-# from model import sc
+import pandas as pd
+
+
 
 fName1 = 'modelCr.pkl'
 modelCr = pickle.load(open(fName1, 'rb'))
 
-
-
 app = Flask(__name__)
 
+@app.route('/call_W')
+def call_W():
+    return render_template('weather.html')
+
+@app.route('/get_W', methods=['POST'])
+def get_W():
+    df = pd.read_csv( 'Weather.csv', parse_dates=['Time'], index_col=['Time'] )
+    # print("1", df)
+    place = request.form['place']
+    place_data = df[df['Place'] == place].drop( ['Month'], axis=1 )
+    # print("2", place_data)
+    l = list( set( df['Place'] ) )
+    a, di = range( 1, len( l ) ), {}
+    for k, v in zip( a, l ):
+        di[v] = k
+    # print(di)
+    df['Place'] = df['Place'].replace( di )
+    # print("3", place)
+    place_data = round(place_data.resample('M').mean(), 2)
+
+    # print( "4", place_data )
+
+    labels = [
+        'JAN', 'FEB', 'MAR', 'APR',
+        'MAY', 'JUN', 'JUL', 'AUG',
+        'SEP', 'OCT', 'NOV', 'DEC'
+    ]
+    values1 = list(place_data['Humidity'])
+    values2 = list( place_data['Temperature'] )
+    values3 = list(place_data['Precipitation'])
+    #mx = max(max(values1), max(values2), max(values3))
+
+
+
+    return render_template('weather.html', labels=labels, values1=values1, values2=values2, values3=values3, place=place)
 
 @app.route('/')
 def index():
@@ -20,7 +54,7 @@ def index():
 
 @app.route('/call_weather')
 def call_weather():
-    return render_template('index.html', predictionW='form')
+    return render_template('index.html')
 
 
 @app.route('/get_weather', methods=['POST'])
@@ -36,7 +70,7 @@ def get_weather():
     if x["cod"] != "404":
         y = x["main"]
 
-        temp = round( (y["temp"] - 273.15), 2 )
+        temp = round( (y["temp"] - 273.15), 2)
         humidity = y["humidity"]
 
 
