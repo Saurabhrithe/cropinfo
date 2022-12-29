@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="utf-8" />
   <title>Dashboard</title>
@@ -14,8 +14,10 @@
             <li><a href="/">Home</a></li>
         </div>
     </div>
-    <form method = "POST"  onsubmit="return validate()" action="{{url_for('get_W')}}" autocomplete="on">
-        <select  name="place" id="place" >
+    <div class="container">
+        <form method = "POST"  onsubmit="return validate()" action="{{url_for('get_W')}}" autocomplete="on" >
+            <select  name="place" id="place" >
+                <option>------SELECT------</option>
                 <option id="Ahmadnagar" value="Ahmadnagar">Ahmadnagar</option>
                 <option id="Akola" value="Akola">Akola</option>
                 <option id="Amravati" value="Amravati">Amravati</option>
@@ -33,7 +35,7 @@
                 <option id="Nanded" value="Nanded">Nanded</option>
                 <option id="Nandurbar" value="Nandurbar">Nandurbar</option>
                 <option id="Nashik" value="Nashik">Nashik</option>
-                <option id="Osamabad" value="Osamabad">Osamabad</option>
+                <option id="Osmanabad" value="Osmanabad">Osmanabad</option>
                 <option id="Parbhani" value="Parbhani">Parbhani</option>
                 <option id="Pune" value="Pune">Pune</option>
                 <option id="Ratnagiri" value="Ratnagiri">Ratnagiri</option>
@@ -44,52 +46,83 @@
                 <option id="Wardha" value="Wardha">Wardha</option>
                 <option id="Washim" value="Washim">Washim</option>
                 <option id="Yavatmal" value="Yavatmal">Yavatmal</option>
-        </select>
-        <div class="btn">
+            </select>
+            <div class="radio_btn">
+                <input type="radio" name="options" id="option1" value="M" required> Monthly </input>
+                <input type="radio" name="options" id="option2" value="Q" required> Quarterly </input>
+            </div>
             <button type="submit"  class="btn_label" >Submit</button>
+        </form>
+
+        <div class="weather_graph">
+
+            <center>
+                <p>Average Weather Analysis For {{place}} District</p> <br>
+                <span class="s1"> </span>Rainfall
+                <span class="s2"> </span>Temp
+                <span class="s3"> </span>Humidity
+            </center>
+
+            <canvas id="chart" width="600" height="400"></canvas>
         </div>
-    </form>
-    <div class="container">
-        <div class="weather">
-            Average Weather Analysis For {{place}} District
+
+
+        <div class="live_weather">
+            <p>Live weather Updates in your Region</p>
+
+            <h5>MIN: {{temp_min}}° C </h5>
+            <h5>MAX: {{temp_max}}° C</h5>
+            <h5>Feels Like: {{feels_like}}° C </h5>
+            <h5>Humidity: {{humidity}} </h5>
         </div>
     </div>
-    <canvas id="chart" width="600" height="400"></canvas>
+
     <script>
+
+
+
       var data = {
       labels : [
+
           {% for item in labels %}
            "{{ item }}",
           {% endfor %}
 	  ],
+
       datasets: [
        {
-            label: "Blue",
+
             fillColor: "blue",
-            data:[ {% for item in values1 %}
+
+            data:[ {% for item in values3 %}
                "{{ item }}",
               {% endfor %} ]
        },
        {
-            label: "Red",
-            fillColor: "red",
-            data: [ {% for item in values2 %}
+   fillColor: "red",
+
+
+           data: [
+
+             {% for item in values2 %}
                "{{ item }}",
               {% endfor %}]
        },
-       {
-            label: "Green",
-            fillColor: "green",
-            data: [{% for item in values3 %}
+         {
+
+            fillColor: "cyan",
+
+            data:[ {% for item in values1 %}
                "{{ item }}",
-              {% endfor %}]
-       }
+              {% endfor %} ]
+       },
       ]
       };
-      var mychart = document.getElementById("chart").getContext("2d");
 
+
+        var mychart = document.getElementById("chart").getContext("2d");
        steps = 10
-       max = 100
+       max = {{mx}}
 
      // draw bar chart
      new Chart(mychart).Bar(data, {
@@ -100,9 +133,11 @@
        scaleShowVerticalLines: true,
        scaleShowGridLines : true,
        barShowStroke : true,
-       scaleShowLabels: true
+       scaleShowLabels: true,
        }
      );
+
+
     </script>
 
 
