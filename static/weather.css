@@ -1,9 +1,7 @@
 body{
-    //display:flex;
-    //flex-direction: column;
-    //height: 100vh;
-    //width:device-width;
+    height: 100vh;
     background: linear-gradient(135deg,#00BFFF,#9b5);
+    font-family: cursive;
 }
 .navBar{
     display: flex;
@@ -28,6 +26,63 @@ a {
 li {
  list-style: none;
 }
-form, .btn{
+form{
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 200px;
+    font-weight: 700;
+    padding:25px;
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    justify-content: center;
+}
+select, .btn_label{
+    font-weight: 700;
+    height: 25px;
+    border-color: 2px solid linear-gradient(135deg,#00BFFF,#9b5);
+    border-radius: 5px;
+    width: 130px;
+}
+.radio_btn, .btn_label{
+    margin-top: 10px;
+}
+p{
+    color: white;
+    font-family: cursive;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.weather_graph{
     padding: 10px;
+}
+.live_weather{
+    border: 2px solid black;
+    border-radius: 5px;
+    max-height: 200px;
+    font-weight: 700;
+    padding:15px;
+}
+canvas{
+    text-color: white;
+}
+.s1, .s2, .s3 {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  border-radius: 30%;
+}
+.s1{
+    background-color: blue;
+}
+.s2{
+    background-color: red;
+}
+.s3{
+    background-color: cyan;
 }
